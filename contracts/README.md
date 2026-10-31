@@ -1,6 +1,6 @@
 # MiniDEX 合约工程
 
-使用 Hardhat 3、ethers 6 和 TypeScript。`contracts/MiniDEX.sol` 目前仅是 Demo，DEX 功能尚待实现。
+使用 Hardhat 3、ethers 6 和 TypeScript，包含两个 AMM DEX、ERC20 测试代币、ERC721 流动性凭证和跨 DEX 原子套利。
 
 ## 安装与检查
 
@@ -14,6 +14,8 @@ npm run compile
 npm run typecheck
 npm test
 ```
+
+部署脚本会同时部署 TokenA、TokenB、两个不同初始价格的 DEX、两个 NFT 合约和套利合约，并将地址写入 `../frontend/src/deployments.local.json`。
 
 `npm run build` 与 `npm run compile` 等效。类型检查会先编译合约并生成类型。当前 Solidity 编译器为 0.8.20，OpenZeppelin 使用兼容该编译器的稳定版 5.4.0。
 
@@ -29,6 +31,12 @@ npm run node
 
 ```bash
 npm run deploy
+```
+
+模拟 20 个本地用户领取代币、添加流动性并执行兑换：
+
+```bash
+npm run simulate
 ```
 
 默认 RPC 地址为 `http://127.0.0.1:8545`，Chain ID 为 `31337`。部署脚本输出 MiniDEX 合约地址；ABI 位于 `artifacts/contracts/MiniDEX.sol/MiniDEX.json`。
